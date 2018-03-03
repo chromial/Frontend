@@ -1,0 +1,31 @@
+<form [formGroup]="form">
+  <input type="radio" formControlName="group1" value="2" (click)="doSomething(2);"> Beef
+  <input type="radio" formControlName="group1" value="1" (click)="doSomething(1);"> Lamb
+  <input type="radio" formControlName="group1" value="3" (click)="doSomething(3);"> Fish
+  <input type="radio" formControlName="group1" value="4" (click)="doSomething(4);"> Pork
+  <input type="radio" formControlName="group1" value="5" (click)="doSomething(5);"> Chicken
+  <br>
+  <input type="text" formControlName="usrname"><br>
+  <button (click)="onClick();">Bend</button>
+</form>
+<p>
+<p>Form value: {{ form.value | json }}</p>  
+{{ form.status }}
+<p>Name value: {{ form.get('usrname').value }}</p>
+<p>Status value: {{ form.get('usrname').status }}</p>
+<p>invalid {{ form.get('usrname').invalid }}</p>
+<p>dirty: {{ form.get('usrname').dirty }}</p>
+<p>pristine: {{ form.get('usrname').pristine }}</p>
+<p>touched: {{ form.get('usrname').touched }}</p>
+<div *ngIf="form.get('usrname').invalid && (form.get('usrname').dirty || form.get('usrname').touched)" class="alert alert-danger">
+  <div *ngIf="form.get('usrname').errors.required">
+    Name is required. 
+  </div>
+    <div *ngIf="form.get('usrname').errors.minlength">
+    Name must be at least 4 characters long.
+  </div>
+  <div *ngIf="form.get('usrname').errors.forbiddenName">
+    Name cannot be Bob.
+  </div>
+</div>
+
